@@ -6,17 +6,30 @@ import java.util.Random;
 import com.example.coloredelement.ColoredSurface;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.camera2.params.RggbChannelVector;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Message;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class MainActivity extends Activity {
+
+	static private final String MOMAURL = "http://www.moma.org";
+	static private final String CHOOSER_TEXT = "Load " + MOMAURL + " with:";
+
+	static private final String TAG = "ModernArtUI";
 
 	private SeekBar sbColorChange;
 
@@ -97,10 +110,43 @@ public class MainActivity extends Activity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		switch (item.getItemId()) {
+		case R.id.more_information: {
+			AlertDialog dialog = new AlertDialog.Builder(MainActivity.this).create();
+			TextView msg = new TextView(this);
+			msg.setText(
+					"Inspired by work of artists such as \n Piet Mordian and Ben Nicholson. \n \n Click below to learn more!");
+			msg.setGravity(Gravity.CENTER);
+			dialog.setView(msg);
+			dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Visit Moma", new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					startBrowser();
+				}
+			});
+			dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Not Now", new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.cancel();
+
+				}
+			});
+
+			dialog.show();
 			return true;
+
+		}
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void startBrowser() {
+		Intent baseIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(MOMAURL));
+
+		Intent chooserIntent = Intent.createChooser(baseIntent, CHOOSER_TEXT);
+
+		startActivity(chooserIntent);
 	}
 }

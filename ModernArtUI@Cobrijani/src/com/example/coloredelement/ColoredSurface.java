@@ -4,6 +4,7 @@ import java.util.Random;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.widget.ImageView;
 
 public class ColoredSurface {
@@ -28,6 +29,9 @@ public class ColoredSurface {
 		try {
 			ColorDrawable background = (ColorDrawable) coloredImageView.getBackground();
 			int color = background.getColor();
+
+			Log.i("Color", "" + coloredImageView.getId());
+			Log.i("Color", "" + color);
 
 			if (checkIfForbiden(color)) {
 				return false;
