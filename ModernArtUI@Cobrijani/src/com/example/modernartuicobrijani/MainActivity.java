@@ -1,16 +1,88 @@
 package com.example.modernartuicobrijani;
 
+import java.util.ArrayList;
+import java.util.Random;
+
+import com.example.coloredelement.ColoredSurface;
+
 import android.app.Activity;
+import android.graphics.Color;
+import android.hardware.camera2.params.RggbChannelVector;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class MainActivity extends Activity {
+
+	private SeekBar sbColorChange;
+
+	private final int numOfCElements = 5;
+
+	private ImageView firstLeftCElement;
+	private ImageView secondLeftCElement;
+	private ImageView firstRightCElement;
+	private ImageView secondRightCElement;
+	private ImageView thirdRightCElement;
+
+	private ColoredSurface[] coloredElements;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+		firstLeftCElement = (ImageView) findViewById(R.id.firstLeftCElement);
+		secondLeftCElement = (ImageView) findViewById(R.id.SecondLeftCElement);
+		firstRightCElement = (ImageView) findViewById(R.id.firstRightCElement);
+		secondRightCElement = (ImageView) findViewById(R.id.SecondRightCELement);
+		thirdRightCElement = (ImageView) findViewById(R.id.ThirdRightCElement);
+
+		// connecting every image view with their respected list of random
+		// colors
+		coloredElements = new ColoredSurface[numOfCElements];
+		coloredElements[0] = new ColoredSurface(firstLeftCElement, ColoredSurface.generateRandomColors(10));
+		coloredElements[1] = new ColoredSurface(secondLeftCElement, ColoredSurface.generateRandomColors(10));
+		coloredElements[2] = new ColoredSurface(firstRightCElement, ColoredSurface.generateRandomColors(10));
+		coloredElements[3] = new ColoredSurface(secondRightCElement, ColoredSurface.generateRandomColors(10));
+		coloredElements[4] = new ColoredSurface(thirdRightCElement, ColoredSurface.generateRandomColors(10));
+
+		// initial color
+		coloredElements[0].changeColor(0);
+		coloredElements[1].changeColor(0);
+		coloredElements[2].changeColor(0);
+		coloredElements[3].changeColor(0);
+		coloredElements[4].changeColor(0);
+
+		sbColorChange = (SeekBar) findViewById(R.id.sBcolorChange);
+
+		// colors from 0 to 9
+		sbColorChange.setMax(9);
+
+		sbColorChange.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				for (int i = 0; i < coloredElements.length; ++i) {
+					coloredElements[i].changeColor(progress);
+				}
+			}
+		});
 	}
 
 	@Override

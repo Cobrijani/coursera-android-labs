@@ -1,16 +1,84 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000"
     tools:context="com.example.modernartuicobrijani.MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/coloredElementsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/sBcolorChange"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/leftSideLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/firstLeftCElement"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="2.5dp"
+                android:layout_marginEnd="2.5dp"
+                android:layout_weight="1"
+                android:background="#ffffff" />
+
+            <ImageView
+                android:id="@+id/SecondLeftCElement"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginEnd="2.5dp"
+                android:layout_marginTop="2.5dp"
+                android:layout_weight="1"
+                android:background="#202020" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rightSideLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/firstRightCElement"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="2.5dp"
+                android:layout_marginStart="2.5dp"
+                android:layout_weight="1"
+                android:background="#aaaaff" />
+
+            <ImageView
+                android:id="@+id/SecondRightCELement"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="2.5dp"
+                android:layout_marginStart="2.5dp"
+                android:layout_marginTop="2.5dp"
+                android:layout_weight="1"
+                android:background="#00aa00" />
+
+            <ImageView
+                android:id="@+id/ThirdRightCElement"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="2.5dp"
+                android:layout_marginTop="2.5dp"
+                android:layout_weight="1"
+                android:background="#00cc00" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <SeekBar
+        android:id="@+id/sBcolorChange"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>
