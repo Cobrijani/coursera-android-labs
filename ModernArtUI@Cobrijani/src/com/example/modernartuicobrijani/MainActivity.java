@@ -47,6 +47,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		
 
 		firstLeftCElement = (ImageView) findViewById(R.id.firstLeftCElement);
 		secondLeftCElement = (ImageView) findViewById(R.id.SecondLeftCElement);
@@ -112,29 +114,7 @@ public class MainActivity extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		switch (item.getItemId()) {
 		case R.id.more_information: {
-			AlertDialog dialog = new AlertDialog.Builder(MainActivity.this).create();
-			TextView msg = new TextView(this);
-			msg.setText(
-					"Inspired by work of artists such as \n Piet Mordian and Ben Nicholson. \n \n Click below to learn more!");
-			msg.setGravity(Gravity.CENTER);
-			dialog.setView(msg);
-			dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Visit Moma", new OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					startBrowser();
-				}
-			});
-			dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Not Now", new OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.cancel();
-
-				}
-			});
-
-			dialog.show();
+			startDialog();
 			return true;
 
 		}
@@ -148,5 +128,31 @@ public class MainActivity extends Activity {
 		Intent chooserIntent = Intent.createChooser(baseIntent, CHOOSER_TEXT);
 
 		startActivity(chooserIntent);
+	}
+
+	private void startDialog() {
+		AlertDialog dialog = new AlertDialog.Builder(MainActivity.this).create();
+		TextView msg = new TextView(this);
+		msg.setText(
+				" \n Inspired by work of artists such as \n Piet Mordian and Ben Nicholson. \n \n Click below to learn more!");
+		msg.setGravity(Gravity.CENTER);
+		dialog.setView(msg);
+		dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Visit Moma", new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				startBrowser();
+			}
+		});
+		dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Not Now", new OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.cancel();
+
+			}
+		});
+
+		dialog.show();
 	}
 }
